@@ -11,7 +11,13 @@ function Home({ pizzas }) {
         <Categories
           items={["Мясные", "Вегетарианские", "Гриль", "Острые", "Закрытые"]}
         />
-        <SortPopup items={["популярности", "цене", "алфавиту"]} />
+        <SortPopup
+          items={[
+            { label: "популярности", type: "popular" },
+            { label: "цене", type: "price" },
+            { label: "алфавиту", type: "alphabet" },
+          ]}
+        />
       </div>
 
       <h2 className="content__title">Все пиццы</h2>

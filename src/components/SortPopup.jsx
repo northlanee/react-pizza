@@ -5,7 +5,6 @@ function SortPopup({ items }) {
   const [popupVisible, setPopupVisible] = useState(false);
   const [activeItem, setActiveItem] = useState(0);
   const sortRef = useRef();
-  const activeLabel = items[activeItem];
 
   const togglePopupVisible = () => setPopupVisible(!popupVisible);
 
@@ -21,6 +20,18 @@ function SortPopup({ items }) {
   useEffect(() => {
     document.body.addEventListener("click", handleOutsideClick);
   }, []);
+
+  const sortEl =
+    items &&
+    items.map((item, index) => (
+      <li
+        key={item.type}
+        className={classNames({ active: index === activeItem })}
+        onClick={() => onSelectItem(index)}
+      >
+        {item.label}
+      </li>
+    ));
 
   return (
     <div>
@@ -40,22 +51,11 @@ function SortPopup({ items }) {
             />
           </svg>
           <b>Сортировка по:</b>
-          <span onClick={togglePopupVisible}>{activeLabel}</span>
+          <span onClick={togglePopupVisible}>{items[activeItem].label}</span>
         </div>
         {popupVisible && (
           <div className="sort__popup">
-            <ul>
-              {items &&
-                items.map((item, index) => (
-                  <li
-                    key={item}
-                    className={classNames({ active: index === activeItem })}
-                    onClick={() => onSelectItem(index)}
-                  >
-                    {item}
-                  </li>
-                ))}
-            </ul>
+            <ul>{sortEl}</ul>
           </div>
         )}
       </div>
