@@ -10,6 +10,11 @@ function filters(state = initialState, action) {
         ...state,
         sortBy: action.payload.sortBy,
       };
+    case "SET_CATEGORY":
+      return {
+        ...state,
+        category: action.payload.category,
+      };
     default:
       return state;
   }

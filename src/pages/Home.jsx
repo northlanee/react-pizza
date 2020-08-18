@@ -3,7 +3,8 @@ import React from "react";
 import { Categories, SortPopup, PizzaBlock } from "../components";
 
 function Home({ pizzas }) {
-  const pizzasEl = pizzas.map((el) => <PizzaBlock key={el.id} {...el} />);
+  const pizzasEl =
+    pizzas && pizzas.map((el) => <PizzaBlock key={el.id} {...el} />);
 
   return (
     <div className="container">
