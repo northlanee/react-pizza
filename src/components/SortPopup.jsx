@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import classNames from "classnames";
 
-function SortPopup({ items }) {
+const SortPopup = React.memo(({ items, activeItem, onSelectSort }) => {
   const [popupVisible, setPopupVisible] = useState(false);
-  const [activeItem, setActiveItem] = useState(0);
   const sortRef = useRef();
 
   const togglePopupVisible = () => setPopupVisible(!popupVisible);
@@ -13,12 +12,13 @@ function SortPopup({ items }) {
   };
 
   const onSelectItem = (index) => {
-    setActiveItem(index);
+    onSelectSort(index);
     setPopupVisible(false);
   };
 
   useEffect(() => {
     document.body.addEventListener("click", handleOutsideClick);
+    return () => document.body.removeEventListener("click", handleOutsideClick);
   }, []);
 
   const sortEl =
@@ -61,6 +61,6 @@ function SortPopup({ items }) {
       </div>
     </div>
   );
-}
+});
 
 export default SortPopup;

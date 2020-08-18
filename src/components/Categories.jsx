@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 
-function Categories({ items }) {
-  const [activeItem, setActiveItem] = useState(null);
-
-  const onSelectItem = (index) => setActiveItem(index);
+const Categories = React.memo(function ({
+  items,
+  activeItem,
+  onSelectCategory,
+}) {
+  const onSelectItem = (index) => {
+    onSelectCategory(index);
+  };
 
   const itemsEl =
     items &&
@@ -22,7 +26,7 @@ function Categories({ items }) {
       <ul>
         <li
           className={activeItem === null ? "active" : ""}
-          onClick={() => setActiveItem(null)}
+          onClick={() => onSelectItem(null)}
         >
           Все
         </li>
@@ -30,6 +34,6 @@ function Categories({ items }) {
       </ul>
     </div>
   );
-}
+});
 
 export default Categories;

@@ -1,6 +1,6 @@
 const initialState = {
-  category: 0,
-  sortBy: "popular",
+  category: null,
+  sortBy: 0,
 };
 
 function filters(state = initialState, action) {
@@ -13,7 +13,7 @@ function filters(state = initialState, action) {
     case "SET_CATEGORY":
       return {
         ...state,
-        category: action.payload.category,
+        category: action.payload.catIndex,
       };
     default:
       return state;

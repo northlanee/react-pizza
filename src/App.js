@@ -1,17 +1,16 @@
 import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
 
-import "./scss/app.scss";
-
 import { Header } from "./components";
 import { Home, Cart } from "./pages";
 
 import { setPizzas } from "./redux/actions/pizzas";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+
+import "./scss/app.scss";
 
 function App() {
   const dispatch = useDispatch();
-  const { items } = useSelector(({ pizzas }) => ({ items: pizzas.items }));
 
   useEffect(() => {
     fetch("http://localhost:3000/db.json")
@@ -25,7 +24,7 @@ function App() {
     <div className="wrapper">
       <Header />
       <div className="content">
-        <Route path="/" render={() => <Home pizzas={items} />} exact />
+        <Route path="/" component={Home} exact />
         <Route path="/cart" component={Cart} exact />
       </div>
     </div>
