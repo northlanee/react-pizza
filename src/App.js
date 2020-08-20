@@ -13,7 +13,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch("http://localhost:3000/db.json")
+    fetch("http://localhost:3001/db.json")
       .then((res) => {
         return res.json();
       })
