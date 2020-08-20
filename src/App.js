@@ -4,7 +4,7 @@ import { Route } from "react-router-dom";
 import { Header } from "./components";
 import { Home, Cart } from "./pages";
 
-import { setPizzas } from "./redux/actions/pizzas";
+import { fetchPizzas } from "./redux/actions/pizzas";
 import { useDispatch } from "react-redux";
 
 import "./scss/app.scss";
@@ -13,11 +13,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch("http://localhost:3001/db.json")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => dispatch(setPizzas(data.pizzas)));
+    dispatch(fetchPizzas());
   }, [dispatch]);
 
   return (
