@@ -5,17 +5,13 @@ const Categories = React.memo(function ({
   activeItem,
   onSelectCategory,
 }) {
-  const onSelectItem = (index) => {
-    onSelectCategory(index);
-  };
-
   const itemsEl =
     items &&
     items.map((item, index) => (
       <li
         key={item}
         className={activeItem === index ? "active" : ""}
-        onClick={() => onSelectItem(index)}
+        onClick={() => onSelectCategory(index)}
       >
         {item}
       </li>
@@ -26,7 +22,7 @@ const Categories = React.memo(function ({
       <ul>
         <li
           className={activeItem === null ? "active" : ""}
-          onClick={() => onSelectItem(null)}
+          onClick={() => onSelectCategory(null)}
         >
           Все
         </li>

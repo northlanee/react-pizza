@@ -27,7 +27,7 @@ const SortPopup = React.memo(({ items, activeItem, onSelectSort }) => {
       <li
         key={item.type}
         className={classNames({ active: index === activeItem })}
-        onClick={() => onSelectItem(index)}
+        onClick={() => onSelectItem(item)}
       >
         {item.label}
       </li>
@@ -51,7 +51,7 @@ const SortPopup = React.memo(({ items, activeItem, onSelectSort }) => {
             />
           </svg>
           <b>Сортировка по:</b>
-          <span onClick={togglePopupVisible}>{items[activeItem].label}</span>
+          <span onClick={togglePopupVisible}>{activeItem.label}</span>
         </div>
         {popupVisible && (
           <div className="sort__popup">
