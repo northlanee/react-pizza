@@ -5,6 +5,7 @@ import { Categories, SortPopup, PizzaBlock, Loading } from "../components";
 
 import { setCategory, setSortBy } from "../redux/actions";
 import { fetchPizzas } from "../redux/actions/pizzas";
+import { addPizzaToCart } from "../redux/actions/cart";
 
 const categories = ["Мясные", "Вегетарианские", "Гриль", "Острые", "Закрытые"];
 const sortItems = [
@@ -13,14 +14,15 @@ const sortItems = [
   { label: "алфавиту", type: "name" },
 ];
 
-function Home() {
+const Home = () => {
   const dispatch = useDispatch();
-  const { pizzas, isLoading, category, sortBy } = useSelector(
-    ({ pizzas, filters }) => ({
+  const { pizzas, isLoading, category, sortBy, cartPizzas } = useSelector(
+    ({ pizzas, filters, cart }) => ({
       pizzas: pizzas.items,
       isLoading: pizzas.isLoading,
       category: filters.category,
       sortBy: filters.sortBy,
+      cartPizzas: cart.items,
     })
   );
 
@@ -28,8 +30,26 @@ function Home() {
     dispatch(fetchPizzas(sortBy, category));
   }, [dispatch, category, sortBy]);
 
+  const pizzaAddHandler = React.useCallback(
+    (pizza) => {
+      dispatch(addPizzaToCart(pizza));
+    },
+    [dispatch]
+  );
+
   const pizzasEl =
-    pizzas && pizzas.map((el) => <PizzaBlock key={el.id} {...el} />);
+    pizzas &&
+    pizzas.map((el) => {
+      const inCart = cartPizzas.filter((pizza) => pizza.id === el.id).length;
+      return (
+        <PizzaBlock
+          key={el.id}
+          {...el}
+          onAddPizza={pizzaAddHandler}
+          inCart={inCart}
+        />
+      );
+    });
 
   const categorySelectHandler = React.useCallback(
     (index) => dispatch(setCategory(index)),
@@ -61,6 +81,6 @@ function Home() {
       <div className="content__items">{pizzasEl}</div>
     </div>
   );
-}
+};
 
 export default Home;

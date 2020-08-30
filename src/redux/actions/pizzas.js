@@ -27,7 +27,6 @@ export const fetchPizzas = (sortBy, category) => (dispatch) => {
       return res.json();
     })
     .then((data) => {
-      console.log(sortBy);
       dispatch(setPizzas(data));
       dispatch(setLoading(false));
     });

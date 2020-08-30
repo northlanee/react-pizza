@@ -5,7 +5,7 @@ const initialState = {
   sortBy: { label: "популярности", type: "rating" },
 };
 
-function filters(state = initialState, action) {
+export default (state = initialState, action) => {
   switch (action.type) {
     case SET_SORT_BY:
       return {
@@ -20,6 +20,4 @@ function filters(state = initialState, action) {
     default:
       return state;
   }
-}
-
-export default filters;
+};
