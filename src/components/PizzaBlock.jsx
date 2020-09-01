@@ -4,7 +4,6 @@ import Button from "./Button";
 
 const PizzaBlock = React.memo(
   ({ id, name, imageUrl, price, types, sizes, onAddPizza, inCart }) => {
-    console.log("render", id);
     const availableTypes = ["тонкое", "традиционное"];
     const availableSizes = [26, 30, 40];
 
